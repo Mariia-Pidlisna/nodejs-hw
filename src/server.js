@@ -22,6 +22,10 @@ app.use(cors());
 app.use(helmet());
 app.use(notesRoutes);
 
+app.get('/', (req, res) => {
+  res.status(200).json({ message: 'Hello!' });
+});
+
 
 app.use(notFoundHandler);
 app.use(errorHandler);
