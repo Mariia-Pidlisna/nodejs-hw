@@ -6,13 +6,14 @@ const objectIdValidator = (value, helpers) => {
   if (!isValidObjectId(value)) {
     return !isValidObjectId(value) ? helpers.message('Invalid id format') : value;
   }
+  return value;
 };
 
 
 export const getAllNotesSchema = {
   [Segments.QUERY]: Joi.object({
     page: Joi.number().integer().min(1).default(1),
-    perPage: Joi.number().integer().min(5).max(15).default(10),
+    perPage: Joi.number().integer().min(5).max(20).default(10),
     tag: Joi.string().valid(...TAGS).optional(),
     search: Joi.string().allow('').optional(),
   }),
@@ -37,7 +38,7 @@ export const updateNoteSchema = {
     noteId: Joi.string().custom(objectIdValidator).required(),
   }),
   [Segments.BODY]: Joi.object({
-    title: Joi.string().min(1).optional(),
+    title: Joi.string().min(3).optional(),
     content: Joi.string().allow('').optional(),
     tag: Joi.string().valid(...TAGS).optional(),
   }).min(1),
