@@ -24,10 +24,11 @@ const noteSchema = new Schema(
   { timestamps: true }
 );
 
-noteSchema.index({ name: "text" });
-
 noteSchema.index(
-  { name: "text" }
+  {
+    title: "text",
+    content: "text"
+   }
 );
 
 export const Note = model('Note', noteSchema);

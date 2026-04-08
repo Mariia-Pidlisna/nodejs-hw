@@ -4,7 +4,7 @@ import { TAGS } from "../constants/tags.js";
 
 const objectIdValidator = (value, helpers) => {
   if (!isValidObjectId(value)) {
-    return !isValidObjectId(value) ? helpers.message('Invalid id format') : value;
+    return helpers.message('Invalid noteId format');
   }
   return value;
 };
@@ -38,7 +38,7 @@ export const updateNoteSchema = {
     noteId: Joi.string().custom(objectIdValidator).required(),
   }),
   [Segments.BODY]: Joi.object({
-    title: Joi.string().min(3).optional(),
+    title: Joi.string().min(1).optional(),
     content: Joi.string().allow('').optional(),
     tag: Joi.string().valid(...TAGS).optional(),
   }).min(1),
