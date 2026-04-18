@@ -31,8 +31,9 @@ app.get('/', (req, res) => {
   res.status(200).json({ message: 'Hello!' });
 });
 
-app.use(errors());
+
 app.use(notFoundHandler);
+app.use(errors());
 app.use(errorHandler);
 
 await connectMongoDB();
